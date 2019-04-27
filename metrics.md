@@ -44,7 +44,7 @@ When applications are scraped inside kubernetes by prometheus the following labe
 |kubernetes_pod_name| the identifier of the actual kubernetes pod where app is running|
 |pod_template_hash| the hash of the pods configuration defintion|
 
-In addition to these, you may see other labels too, in particular if you deploy to pciprod you'll notice the network policy labels also show up e.g. **networkpolicy_siteminder_io_permit_rds="yes"**
+In addition to these, you may see other labels too, in particular if you deploy to pciprod you'll notice the network policy labels also show up 
 
 ### Non Standard Cases
 
@@ -191,7 +191,7 @@ There are two main cases
 
 Prefix *client_http_* to the Name column to obtain the name of the metric 
 
-You must include the labels for user and route, similar to how its done for server side collection of metrics
+You must include the route label, similar to how its done for server side collection of metrics
 
 
 | Name  | Type  | Description  |
@@ -204,7 +204,7 @@ You must include the labels for user and route, similar to how its done for serv
 
 Prefix *client_gql_* to the Name column to obtain the name of the metric 
 
-You must include the labels for user and operationName, similar to how its done for server side collection of metrics
+You must include the operationName label, similar to how its done for server side collection of metrics
 
 | Name  | Type  | Description  |
 |---|---|---|
