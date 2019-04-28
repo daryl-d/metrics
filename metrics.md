@@ -191,7 +191,7 @@ There are two main cases
 
 Prefix *client_http_* to the Name column to obtain the name of the metric 
 
-You must include the route label, similar to how its done for server side collection of metrics
+You must include the route and service labels, similar to how its done for server side collection of metrics
 
 
 | Name  | Type  | Description  |
@@ -204,7 +204,7 @@ You must include the route label, similar to how its done for server side collec
 
 Prefix *client_gql_* to the Name column to obtain the name of the metric 
 
-You must include the operationName label, similar to how its done for server side collection of metrics
+You must include the operationName and service labels, similar to how its done for server side collection of metrics
 
 | Name  | Type  | Description  |
 |---|---|---|
