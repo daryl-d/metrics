@@ -25,7 +25,7 @@ The way this is done inside kubernetes is through the use of annotations typical
 
 | Annotation Name | Description  |
 | ------------- |-------------|
-|  prometheus.io/scrape |  set to "true" to inscruction this application to be scraped by prometheus |
+|  prometheus.io/scrape |  set to "true" to inscruct this application to be scraped by prometheus |
 | prometheus.io/port    |  the port of the http server to scrape, typically 3001 for us. It's generally best to put this on a separate express app so its not exposed to the internet |
 | prometheus.io/path    |  the path to where to locate metrics on the http server, its generally **/metrics** |
 
