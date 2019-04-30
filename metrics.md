@@ -3,43 +3,43 @@
 After reading this document you will understand the following
 - How we gather metrics
 - Why we don't use the Prometheus Pushgateway
-- How we label and name metrics per service types
+- How we name and label metrics per service type
 - How we name and label metrics for clients
 
 ## Metrics Gathering
 
-Purpose of this document is to outline how metrics are extracted from our applications / components and sent to prometheus.
-I have broken this down into two main cases
+The purpose of this document is to outline how metrics are extracted from our applications / components and sent to prometheus.
+I have broken this down into two main cases,
 - Standard
 - Non Standard
 
 ### Standard Case
 
-The usual cases is when we have persistent / long running applications running inside kubernetes. This includes typically the following
+The usual case is when we have persistent / long running applications running inside kubernetes. This includes typically the following,
 - Express JS Web Applications
 - GraphQL applications
 - NodeJS based cron jobs (e.g. consuming SQS Queue)
 
 Each of these apps will expose a metrics endpoint which will be periodically scraped by prometheus.
-The way this is done inside kubernetes is through the use of annotations typically done on deployment or pod resources
+The way this is done inside kubernetes is through the use of annotations typically done on deployment or pod resources.
 
 | Annotation Name | Description  |
 | ------------- |-------------|
-|  prometheus.io/scrape |  set to "true" to inscruction this application to be scraped by prometheus |
-| prometheus.io/port    |  the port of the http server to scrape, typically 3001 for us. It's generally best to put this on a separate express app so its not exposed to the internet |
+|  prometheus.io/scrape |  set to "true" to instruct this application to be scraped by prometheus |
+| prometheus.io/port    |  the port of the http server to scrape, typically 3001 for us. It's recommended to deploy this as a separate express app so its not exposed to the internet  |
 | prometheus.io/path    |  the path to where to locate metrics on the http server, its generally **/metrics** |
 
 
 #### Labels
 
-When applications are scraped inside kubernetes by prometheus the following labels are added on
+When applications are scraped inside kubernetes by prometheus the following labels are added on,
 
 | Label Name | Description  |
 | ------------- |-------------|
-|  app |  the name of the application (obtained from the standard deployment lables) its typically the system-component |
+|  app |  the name of the application (obtained from the standard deployment labels) its typically the system-component |
 | chart    |  the name of the helm chart |
-| component   |  the name of the component (obtained from the standard deployment lables) |
-| system | the name of the microservice e.g. smx-core, pmsx (obtained from the standard deployment lables)|
+| component   |  the name of the component (obtained from the standard deployment labels) |
+| system | the name of the microservice e.g. smx-core, pmsx (obtained from the standard deployment labels)|
 |kubernetes_namespace| the kubernetes namespace where the application is deployed|
 |kubernetes_pod_name| the identifier of the actual kubernetes pod where app is running|
 |pod_template_hash| the hash of the pods configuration defintion|
@@ -78,7 +78,7 @@ I would like all metrics to have at least the following labels
 - app
 - version
 
-With these combinations of labels you should be easily be able to see from grafana dashboards how positively / negatively software changes has impacted performance.
+With these combinations of labels, you should easily be able to see from grafana dashboards how positively / negatively software changes have impacted performance.
 
 I will futher break the cases down
 
@@ -155,7 +155,7 @@ Prefix *lambda_* to the Name column to obtain the name of the metric
 | status  |  counter | counter which has additional label of code which represents the number of times this status was returned  |
 | errors  | counter  | counter which has additional label name, indicating the number of times this error has occurred e.g. AxiosError (typically in JS / Java you'd get the name of the class) |
 
-In addtion the following are captured if the lambda is sourced from a kinesis stream
+In addition the following are captured if the lambda is sourced from a kinesis stream
 
 | Name  | Type  | Description  |
 |---|---|---|
